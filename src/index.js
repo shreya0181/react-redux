@@ -3,6 +3,41 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux';
+
+// STORE  - Globalised State
+// Action -> A function that returns an object
+const increment = ()=>{
+  return{
+    type: 'Increment'
+  }
+}
+const decrement = ()=>{
+  return{
+    type: 'Decrement'
+  }
+}
+
+
+// Reducer 
+
+const counter =(state=0, action)=>{
+  switch(action.type){
+    case'Increment':{
+              return state +1;
+    }
+    case'Decrement':{
+              return state -1 ;
+    }
+  }
+
+}
+// Dispatch
+
+let store = createStore(counter);
+store.subscribe(()=>console.log(store.getState()))
+
+store.dispatch(increment());
 
 ReactDOM.render(
   <React.StrictMode>
